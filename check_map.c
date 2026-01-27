@@ -6,7 +6,7 @@
 /*   By: antcamar <antcamar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 15:09:22 by antcamar          #+#    #+#             */
-/*   Updated: 2026/01/22 17:38:49 by antcamar         ###   ########.fr       */
+/*   Updated: 2026/01/27 00:42:36 by antcamar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,11 @@ void	read_map(const char *filename, t_game *game)
 {
 	int		check;
 	char	*result;
-	int		i;
 	int		numberl;
 
-	i = -1;
 	numberl = 0;
 	check = open(filename, O_RDONLY);
+	openerror(check);
 	result = get_next_line(check);
 	while (result != NULL)
 	{
@@ -29,30 +28,96 @@ void	read_map(const char *filename, t_game *game)
 		free(result);
 		result = get_next_line(check);
 	}
-	game->map = (char **)malloc(sizeof(char *) * numberl);
+	game->height = numberl;
+	game->map = (char **)malloc(sizeof(char *) * numberl + 1);
 	if (!game->map)
 		return ;
+	game->map[numberl] = 0;
 	close(check);
-	check = open(filename, O_RDONLY);
-	while (++i < numberl)
-		game->map[i] = get_next_line(check);
-	close(check);
+	attribute_close(filename, numberl, game);
 }
 
-int check_map(t_game *game)
+int	check_map(t_game *game)
 {
-    int i;
-    int len;
+	int		i;
+	size_t	len;
 
-    if(!game->map)
-        return (1);
-    i = 0;
-    len = ft_strlen(game->map[0]);
-    while (game->map[i])
-    {
-        if (ft_strlen(game->map[i]) != len)
-            return(1);
-        i++;
-    }    
-    return (0);  
+	if (!game->map)
+		return (1);
+	i = 0;
+	len = ft_strlen(game->map[0]);
+	game->size = len;
+	while (game->map[i])
+	{
+		if (ft_strlen(game->map[i]) != len)
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+int	check_walls(t_game *game)
+{
+	int	i;
+
+	i = 0;
+	while (i < game->size)
+	{
+		if (game->map[0][i] != '1')
+			map_error(game);
+		if (game->map[game->height - 1][i] != '1')
+			map_error(game);
+		i++;
+	}
+	i = 0;
+	while (i < game->height)
+	{
+		if (game->map[i][0] != '1')
+			map_error(game);
+		if (game->map[i][game->size - 1] != '1')
+			map_error(game);
+		i++;
+	}
+	return (0);
+}
+
+void	check_param(t_game *game)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	game->e = 0;
+	game->c = 0;
+	game->p = 0;
+	while (i < game->height)
+	{
+		j = 0;
+		while (game->map[i][j])
+		{
+			if (game->map[i][j] == 'E')
+				game->e++;
+			if (game->map[i][j] == 'C')
+				game->c++;
+			if (game->map[i][j] == 'P')
+				game->p++;
+			j++;
+		}
+		i++;
+	}
+	error_param(game);
+}
+
+void	error_param(t_game *game)
+{
+	if (game->c == 0)
+		ft_putstr_fd("Not enough collectibles\n", 2);
+	if (game->p == 0)
+		ft_putstr_fd("Not enough player\n", 2);
+	if (game->p > 1)
+		ft_putstr_fd("Too many players \n", 2);
+	if (game->e == 0)
+		ft_putstr_fd("No exit available\n", 2);
+	if (game->c == 0 || game->p == 0 || game->e == 0 || game->p > 1)
+		exit(1);
 }

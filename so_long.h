@@ -31,6 +31,8 @@ typedef struct s_game
 	char		**mapf;
 	int			verif_e;
 	int			verif_c;
+	int			move;
+	int			collected;
 }				t_game;
 
 typedef struct s_lib
@@ -45,6 +47,12 @@ typedef struct s_lib
 	t_sprite	collectible;
 	t_sprite	exit;
 }				t_lib;
+
+typedef struct s_vars
+{
+	t_lib		*lib;
+	t_game		*game;
+}				t_vars;
 
 void			ft_free_t(char **tab);
 void			read_map(const char *filename, t_game *game);
@@ -65,5 +73,8 @@ int				load_envery_sprites(t_lib *lib);
 int				load_sprite(t_lib *lib, t_sprite *sprite, char *path);
 void			r_tile(t_lib *lib, char tile, int x, int y);
 void			render_map(t_lib *lib, t_game *game);
+int				move_player(t_game *game, int new_x, int new_y);
+int				key_handler(int keycode, t_vars *vars);
+int				close_window(t_vars *vars);
 
 #endif

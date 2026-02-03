@@ -6,7 +6,7 @@
 #    By: antcamar <antcamar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/20 14:05:17 by antcamar          #+#    #+#              #
-#    Updated: 2026/01/28 18:47:51 by antcamar         ###   ########.fr        #
+#    Updated: 2026/02/03 07:02:50 by antcamar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = so_long
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
-SRCS = utils.c check_map.c check_map2.c main.c map_init.c render_map.c
+SRCS = utils.c check_map.c check_map2.c main.c map_init.c render_map.c map_movement.c
 OBJS = $(SRCS:.c=.o)
 
 GNL_DIR = GNL

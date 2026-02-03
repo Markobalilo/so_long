@@ -6,7 +6,7 @@
 /*   By: antcamar <antcamar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 17:26:09 by antcamar          #+#    #+#             */
-/*   Updated: 2026/01/28 17:18:06 by antcamar         ###   ########.fr       */
+/*   Updated: 2026/02/03 07:23:05 by antcamar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ void	fill(t_game *game, int x, int y)
 		game->verif_e += 1;
 	game->mapf[y][x] = 'K';
 	fill(game, x, y - 1);
-    fill(game, x, y + 1);
-    fill(game, x - 1, y);
-    fill(game, x + 1, y);
+	fill(game, x, y + 1);
+	fill(game, x - 1, y);
+	fill(game, x + 1, y);
 }
 
 char	**copy_map(t_game *game)

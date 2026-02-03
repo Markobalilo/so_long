@@ -6,7 +6,7 @@
 /*   By: antcamar <antcamar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 19:14:28 by antcamar          #+#    #+#             */
-/*   Updated: 2026/02/03 07:22:42 by antcamar         ###   ########.fr       */
+/*   Updated: 2026/02/03 14:28:16 by antcamar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,11 @@ void	ft_free_t(char **tab)
 	}
 }
 
-void	openerror(int fd)
+void	openerror(t_game *game, int fd)
 {
 	if (fd == -1)
 	{
+		ft_free_t(game->map);
 		ft_putstr_fd("Cannot open that file.\n", 2);
 		exit(1);
 	}

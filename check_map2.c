@@ -6,7 +6,7 @@
 /*   By: antcamar <antcamar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 17:26:09 by antcamar          #+#    #+#             */
-/*   Updated: 2026/02/03 07:23:05 by antcamar         ###   ########.fr       */
+/*   Updated: 2026/02/03 14:48:15 by antcamar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,21 @@ char	**copy_map(t_game *game)
 	i = -1;
 	game->mapf = (char **)malloc(sizeof(char *) * game->height);
 	if (!game->mapf)
-		return (NULL);
+	{
+		ft_free_t(game->map);
+		exit (1);
+	}
 	while (++i < game->height)
 	{
 		game->mapf[i] = ft_strdup(game->map[i]);
 		if (!game->map[i])
 		{
+			ft_free_t(game->map);
 			ft_free_t(game->mapf);
-			return (NULL);
+			exit (1);
 		}
 	}
+	game->mapf[i] = 0;
 	return (game->mapf);
 }
 
@@ -80,7 +85,7 @@ void	attribute_close(const char *filename, int numberl, t_game *game)
 
 	i = -1;
 	check = open(filename, O_RDONLY);
-	openerror(check);
+	openerror(game, check);
 	while (++i < numberl)
 	{
 		game->map[i] = get_next_line(check);

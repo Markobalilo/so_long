@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   so_long.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: antcamar <antcamar@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/03 11:38:24 by antcamar          #+#    #+#             */
+/*   Updated: 2026/02/03 14:27:23 by antcamar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
@@ -63,18 +75,20 @@ void			error_param(t_game *game);
 void			fill(t_game *game, int x, int y);
 char			**copy_map(t_game *game);
 void			player_pos(t_game *game);
-void			openerror(int fd);
+void			openerror(t_game *game, int fd);
 void			attribute_close(const char *filename, int numberl,
 					t_game *game);
 void			map_error(t_game *game);
 void			show_window(t_lib *lib, t_game *game);
 void			init_mlx(t_lib *lib, t_game *game);
-int				load_envery_sprites(t_lib *lib);
-int				load_sprite(t_lib *lib, t_sprite *sprite, char *path);
+void			load_sprite(t_lib *lib, t_sprite *sprite, char *path,
+					t_game *game);
+void			load_envery_sprites(t_lib *lib, t_game *game);
 void			r_tile(t_lib *lib, char tile, int x, int y);
 void			render_map(t_lib *lib, t_game *game);
-int				move_player(t_game *game, int new_x, int new_y);
+int				move_player(t_vars *vars, t_game *game, int new_x, int new_y);
 int				key_handler(int keycode, t_vars *vars);
 int				close_window(t_vars *vars);
+void			close_window2(t_lib *lib, t_game *game);
 
 #endif

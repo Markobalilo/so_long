@@ -6,7 +6,7 @@
 /*   By: antcamar <antcamar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 15:09:22 by antcamar          #+#    #+#             */
-/*   Updated: 2026/02/03 14:58:00 by antcamar         ###   ########.fr       */
+/*   Updated: 2026/02/05 16:13:48 by antcamar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	read_map(const char *filename, t_game *game)
 	game->map = (char **)malloc(sizeof(char *) * numberl + 1);
 	close(check);
 	if (!game->map)
-		return ;
+		exit (1);
 	game->map[numberl] = 0;
 	attribute_close(filename, numberl, game);
 }

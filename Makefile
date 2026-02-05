@@ -6,7 +6,7 @@
 #    By: antcamar <antcamar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/20 14:05:17 by antcamar          #+#    #+#              #
-#    Updated: 2026/02/03 07:02:50 by antcamar         ###   ########.fr        #
+#    Updated: 2026/02/05 15:56:35 by antcamar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ LIBFT = $(LIBFT_DIR)/libft.a
 
 MLX_DIR = ./minilibx-linux
 MLX = $(MLX_DIR)/libmlx.a
-MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
+MLX_FLAGS = -L$(MLX_DIR) -g -lmlx -lXext -lX11 -lm
 
 all: $(NAME)
 

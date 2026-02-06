@@ -6,7 +6,7 @@
 /*   By: antcamar <antcamar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 17:26:09 by antcamar          #+#    #+#             */
-/*   Updated: 2026/02/05 16:18:23 by antcamar         ###   ########.fr       */
+/*   Updated: 2026/02/06 13:19:50 by antcamar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,12 @@
 
 void	fill(t_game *game, int x, int y)
 {
+	if (!game || !game->mapf)
+		exit (1);
 	if (x < 0 || y < 0 || y >= game->height || x >= game->size)
 		return ;
+	if (!game->mapf[y] || !game->mapf[y][x])
+		exit (1);
 	if (game->mapf[y][x] == '1' || game->mapf[y][x] == 'K')
 		return ;
 	if (game->mapf[y][x] == 'C')
@@ -34,7 +38,7 @@ char	**copy_map(t_game *game)
 	int	i;
 
 	i = -1;
-	game->mapf = (char **)malloc(sizeof(char *) * game->height + 1);
+	game->mapf = (char **)malloc(sizeof(char *) * (game->height + 1));
 	if (!game->mapf)
 	{
 		ft_free_t(game->map);
@@ -43,7 +47,7 @@ char	**copy_map(t_game *game)
 	while (++i < game->height)
 	{
 		game->mapf[i] = ft_strdup(game->map[i]);
-		if (!game->map[i])
+		if (!game->mapf[i])
 		{
 			ft_free_t(game->map);
 			ft_free_t(game->mapf);
@@ -85,7 +89,8 @@ void	attribute_close(const char *filename, int numberl, t_game *game)
 
 	i = -1;
 	check = open(filename, O_RDONLY);
-	openerror(game, check);
+	if (check < 0)
+		openerror(game, check);
 	while (++i < numberl)
 	{
 		game->map[i] = get_next_line(check);

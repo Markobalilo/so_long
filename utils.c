@@ -6,7 +6,7 @@
 /*   By: antcamar <antcamar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 19:14:28 by antcamar          #+#    #+#             */
-/*   Updated: 2026/02/06 13:25:02 by antcamar         ###   ########.fr       */
+/*   Updated: 2026/02/06 13:38:30 by antcamar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,20 @@ void	openerror(t_game *game, int fd)
 {
 	if (fd == -1)
 	{
-		ft_free_t(game->map);
-		ft_putstr_fd("Cannot open that file.\n", 2);
-		exit(1);
+		 if (game->map)
+            ft_free_t(game->map);
+        ft_putstr_fd("Cannot open that file.\n", 2);
+        exit(1);
 	}
 }
 
 void	map_error(t_game *game)
 {
-	ft_free_t(game->map);
-	ft_putstr_fd("The map is not properly surrounded by walls.\n", 2);
-	exit(1);
+    if (game->map)
+        ft_free_t(game->map);
+    if (game->mapf)
+        ft_free_t(game->mapf);
+    ft_putstr_fd("The map is not properly surrounded by walls.\n", 2);
+    exit(1);
 }
+

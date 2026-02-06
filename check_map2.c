@@ -6,7 +6,7 @@
 /*   By: antcamar <antcamar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 17:26:09 by antcamar          #+#    #+#             */
-/*   Updated: 2026/02/06 13:19:50 by antcamar         ###   ########.fr       */
+/*   Updated: 2026/02/06 14:16:06 by antcamar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 void	fill(t_game *game, int x, int y)
 {
 	if (!game || !game->mapf)
-		exit (1);
+		exit(1);
 	if (x < 0 || y < 0 || y >= game->height || x >= game->size)
 		return ;
 	if (!game->mapf[y] || !game->mapf[y][x])
-		exit (1);
+		exit(1);
 	if (game->mapf[y][x] == '1' || game->mapf[y][x] == 'K')
 		return ;
 	if (game->mapf[y][x] == 'C')
@@ -42,7 +42,7 @@ char	**copy_map(t_game *game)
 	if (!game->mapf)
 	{
 		ft_free_t(game->map);
-		exit (1);
+		exit(1);
 	}
 	while (++i < game->height)
 	{
@@ -51,7 +51,7 @@ char	**copy_map(t_game *game)
 		{
 			ft_free_t(game->map);
 			ft_free_t(game->mapf);
-			exit (1);
+			exit(1);
 		}
 	}
 	game->mapf[i] = 0;
@@ -97,8 +97,8 @@ void	attribute_close(const char *filename, int numberl, t_game *game)
 		if (game->map[i] == NULL)
 		{
 			ft_free_t(game->map);
-			close (check);
-			exit (1);
+			close(check);
+			exit(1);
 		}
 	}
 	close(check);

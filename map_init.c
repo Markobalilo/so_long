@@ -6,7 +6,7 @@
 /*   By: antcamar <antcamar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/27 00:45:05 by antcamar          #+#    #+#             */
-/*   Updated: 2026/02/03 14:49:30 by antcamar         ###   ########.fr       */
+/*   Updated: 2026/02/06 14:15:56 by antcamar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,32 +36,30 @@ void	load_envery_sprites(t_lib *lib, t_game *game)
 
 void	close_window2(t_lib *lib, t_game *game)
 {
-    if (game->map)
-        ft_free_t(game->map);
-    if (lib->floor.img)
-        mlx_destroy_image(lib->mlx_p, lib->floor.img);
-    if (lib->player.img)
-        mlx_destroy_image(lib->mlx_p, lib->player.img);
-    if (lib->wall.img)
-        mlx_destroy_image(lib->mlx_p, lib->wall.img);
-    if (lib->exit.img)
-        mlx_destroy_image(lib->mlx_p, lib->exit.img);
-    if (lib->collectible.img)
-        mlx_destroy_image(lib->mlx_p, lib->collectible.img);
-    if (lib->mlx_p && lib->win_p)
-        mlx_destroy_window(lib->mlx_p, lib->win_p);
-    if (lib->mlx_p)
-    {
-        mlx_destroy_display(lib->mlx_p);
-        free(lib->mlx_p);
-    }
-    exit(0);
+	if (game->map)
+		ft_free_t(game->map);
+	if (lib->floor.img)
+		mlx_destroy_image(lib->mlx_p, lib->floor.img);
+	if (lib->player.img)
+		mlx_destroy_image(lib->mlx_p, lib->player.img);
+	if (lib->wall.img)
+		mlx_destroy_image(lib->mlx_p, lib->wall.img);
+	if (lib->exit.img)
+		mlx_destroy_image(lib->mlx_p, lib->exit.img);
+	if (lib->collectible.img)
+		mlx_destroy_image(lib->mlx_p, lib->collectible.img);
+	if (lib->mlx_p && lib->win_p)
+		mlx_destroy_window(lib->mlx_p, lib->win_p);
+	if (lib->mlx_p)
+	{
+		mlx_destroy_display(lib->mlx_p);
+		free(lib->mlx_p);
+	}
+	exit(0);
 }
 
 void	init_mlx(t_lib *lib, t_game *game)
 {
-	t_vars	*vars;
-
 	lib->mlx_p = mlx_init();
 	if (!lib->mlx_p)
 	{
@@ -79,6 +77,13 @@ void	init_mlx(t_lib *lib, t_game *game)
 		exit(1);
 	}
 	load_envery_sprites(lib, game);
+	init_mlx2(lib, game);
+}
+
+void	init_mlx2(t_lib *lib, t_game *game)
+{
+	t_vars	*vars;
+
 	vars = malloc(sizeof(t_vars));
 	if (!vars)
 		close_window2(lib, game);

@@ -6,7 +6,7 @@
 /*   By: antcamar <antcamar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 06:31:31 by antcamar          #+#    #+#             */
-/*   Updated: 2026/02/06 13:34:11 by antcamar         ###   ########.fr       */
+/*   Updated: 2026/02/06 14:16:53 by antcamar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,28 +68,28 @@ int	key_handler(int keycode, t_vars *vars)
 
 int	close_window(t_vars *vars)
 {
-    if (vars->game->map)
-        ft_free_t(vars->game->map);
-    if (vars->game->mapf)
-        ft_free_t(vars->game->mapf);
-    if (vars->lib->floor.img)
-        mlx_destroy_image(vars->lib->mlx_p, vars->lib->floor.img);
-    if (vars->lib->player.img)
-        mlx_destroy_image(vars->lib->mlx_p, vars->lib->player.img);
-    if (vars->lib->wall.img)
-        mlx_destroy_image(vars->lib->mlx_p, vars->lib->wall.img);
-    if (vars->lib->exit.img)
-        mlx_destroy_image(vars->lib->mlx_p, vars->lib->exit.img);
-    if (vars->lib->collectible.img)
-        mlx_destroy_image(vars->lib->mlx_p, vars->lib->collectible.img);
-    if (vars->lib && vars->lib->win_p)
-        mlx_destroy_window(vars->lib->mlx_p, vars->lib->win_p);
-    if (vars->lib->mlx_p)
-    {
-        mlx_destroy_display(vars->lib->mlx_p);
+	if (vars->game->map)
+		ft_free_t(vars->game->map);
+	if (vars->game->mapf)
+		ft_free_t(vars->game->mapf);
+	if (vars->lib->floor.img)
+		mlx_destroy_image(vars->lib->mlx_p, vars->lib->floor.img);
+	if (vars->lib->player.img)
+		mlx_destroy_image(vars->lib->mlx_p, vars->lib->player.img);
+	if (vars->lib->wall.img)
+		mlx_destroy_image(vars->lib->mlx_p, vars->lib->wall.img);
+	if (vars->lib->exit.img)
+		mlx_destroy_image(vars->lib->mlx_p, vars->lib->exit.img);
+	if (vars->lib->collectible.img)
+		mlx_destroy_image(vars->lib->mlx_p, vars->lib->collectible.img);
+	if (vars->lib && vars->lib->win_p)
+		mlx_destroy_window(vars->lib->mlx_p, vars->lib->win_p);
+	if (vars->lib->mlx_p)
+	{
+		mlx_destroy_display(vars->lib->mlx_p);
 		if (vars->lib->mlx_p)
-	        free(vars->lib->mlx_p);
-    }
-    free(vars);
-    exit(0);
+			free(vars->lib->mlx_p);
+	}
+	free(vars);
+	exit(0);
 }

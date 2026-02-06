@@ -6,7 +6,7 @@
 /*   By: antcamar <antcamar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 15:09:22 by antcamar          #+#    #+#             */
-/*   Updated: 2026/02/06 11:47:26 by antcamar         ###   ########.fr       */
+/*   Updated: 2026/02/06 14:16:10 by antcamar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ void	read_map(const char *filename, t_game *game)
 		result = get_next_line(check);
 	}
 	game->height = numberl;
-	game->map = (char **)malloc(sizeof(char *) * numberl + 1);
+	game->map = ft_calloc((numberl + 1), sizeof(char *));
 	close(check);
 	if (!game->map)
-		exit (1);
+		exit(1);
 	game->map[numberl] = 0;
 	attribute_close(filename, numberl, game);
 }
@@ -50,7 +50,7 @@ int	check_map(t_game *game)
 		if (ft_strlen(game->map[i]) != len)
 		{
 			ft_free_t(game->map);
-			exit (1);
+			exit(1);
 		}
 		i++;
 	}
@@ -122,6 +122,6 @@ void	error_param(t_game *game)
 	if (game->c == 0 || game->p == 0 || game->e != 1 || game->p > 1)
 	{
 		ft_free_t(game->map);
-		exit (1);
+		exit(1);
 	}
 }

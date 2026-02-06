@@ -6,7 +6,7 @@
 /*   By: antcamar <antcamar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 11:38:24 by antcamar          #+#    #+#             */
-/*   Updated: 2026/02/05 16:14:03 by antcamar         ###   ########.fr       */
+/*   Updated: 2026/02/06 14:14:09 by antcamar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,5 +90,5 @@ int				move_player(t_vars *vars, t_game *game, int new_x, int new_y);
 int				key_handler(int keycode, t_vars *vars);
 int				close_window(t_vars *vars);
 void			close_window2(t_lib *lib, t_game *game);
-
+void			init_mlx2(t_lib *lib, t_game *game);
 #endif

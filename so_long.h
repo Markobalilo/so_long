@@ -6,7 +6,7 @@
 /*   By: antcamar <antcamar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 11:38:24 by antcamar          #+#    #+#             */
-/*   Updated: 2026/02/06 14:14:09 by antcamar         ###   ########.fr       */
+/*   Updated: 2026/02/06 14:44:40 by antcamar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <sys/stat.h>
-# define TILE_SIZE 32
+# define TILE_SIZE 64
 
 typedef struct s_sprite
 {

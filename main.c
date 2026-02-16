@@ -6,7 +6,7 @@
 /*   By: antcamar <antcamar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 21:10:49 by antcamar          #+#    #+#             */
-/*   Updated: 2026/02/06 14:16:01 by antcamar         ###   ########.fr       */
+/*   Updated: 2026/02/16 15:21:55 by antcamar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	fill_map(const char *filename, t_game *game, t_lib *lib)
 {
+	check_name(filename);
 	read_map(filename, game);
 	check_map(game);
 	check_walls(game);
@@ -25,13 +26,13 @@ void	fill_map(const char *filename, t_game *game, t_lib *lib)
 	game->mapf = NULL;
 	if (game->verif_e < 1)
 	{
-		ft_putstr_fd("No exit reachable\n", 2);
+		ft_putstr_fd("Error : No exit reachable\n", 2);
 		ft_free_t(game->map);
 		exit(1);
 	}
 	if (game->c != game->verif_c)
 	{
-		ft_putstr_fd("No collectibles reachable\n", 2);
+		ft_putstr_fd("Error : No collectibles reachable\n", 2);
 		ft_free_t(game->map);
 		exit(1);
 	}

@@ -6,7 +6,7 @@
 /*   By: antcamar <antcamar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 15:09:22 by antcamar          #+#    #+#             */
-/*   Updated: 2026/02/06 14:16:10 by antcamar         ###   ########.fr       */
+/*   Updated: 2026/02/16 15:22:40 by antcamar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int	check_map(t_game *game)
 	{
 		if (ft_strlen(game->map[i]) != len)
 		{
+			ft_putstr_fd("Error\n", 2);
 			ft_free_t(game->map);
 			exit(1);
 		}
@@ -98,10 +99,12 @@ void	check_param(t_game *game)
 		{
 			if (game->map[i][j] == 'E')
 				game->e++;
-			if (game->map[i][j] == 'C')
+			else if (game->map[i][j] == 'C')
 				game->c++;
-			if (game->map[i][j] == 'P')
+			else if (game->map[i][j] == 'P')
 				game->p++;
+			else
+				map_invalide(game, game->map[i][j]);
 			j++;
 		}
 		i++;
@@ -112,13 +115,13 @@ void	check_param(t_game *game)
 void	error_param(t_game *game)
 {
 	if (game->c == 0)
-		ft_putstr_fd("Not enough collectibles\n", 2);
+		ft_putstr_fd("Error : Not enough collectibles\n", 2);
 	if (game->p == 0)
-		ft_putstr_fd("Not enough player\n", 2);
+		ft_putstr_fd("Error : Not enough player\n", 2);
 	if (game->p > 1)
-		ft_putstr_fd("Too many players \n", 2);
+		ft_putstr_fd("Error : Too many players \n", 2);
 	if (game->e != 1)
-		ft_putstr_fd("No exit available\n", 2);
+		ft_putstr_fd("Error : No exit available\n", 2);
 	if (game->c == 0 || game->p == 0 || game->e != 1 || game->p > 1)
 	{
 		ft_free_t(game->map);

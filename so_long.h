@@ -6,7 +6,7 @@
 /*   By: antcamar <antcamar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 11:38:24 by antcamar          #+#    #+#             */
-/*   Updated: 2026/02/06 14:44:40 by antcamar         ###   ########.fr       */
+/*   Updated: 2026/02/16 14:52:55 by antcamar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct s_game
 	int			verif_c;
 	int			move;
 	int			collected;
+	char		pre_tile;
 }				t_game;
 
 typedef struct s_lib
@@ -91,4 +92,6 @@ int				key_handler(int keycode, t_vars *vars);
 int				close_window(t_vars *vars);
 void			close_window2(t_lib *lib, t_game *game);
 void			init_mlx2(t_lib *lib, t_game *game);
+void			map_invalide(t_game *game, char c);
+void			check_name(const char *filename);
 #endif

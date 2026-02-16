@@ -6,11 +6,23 @@
 /*   By: antcamar <antcamar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 06:31:31 by antcamar          #+#    #+#             */
-/*   Updated: 2026/02/06 17:11:59 by antcamar         ###   ########.fr       */
+/*   Updated: 2026/02/16 15:23:05 by antcamar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void	move_player2(t_game *game, int new_x, int new_y)
+{
+	char	target;
+
+	target = game->map[new_y][new_x];
+	if (target != 'C')
+		game->pre_tile = target;
+	game->map[new_y][new_x] = 'P';
+	ft_putstr_fd("Moves: ", 1);
+	ft_putnbr_fd(++game->move, 1);
+}
 
 int	move_player(t_vars *vars, t_game *game, int new_x, int new_y)
 {
@@ -19,7 +31,7 @@ int	move_player(t_vars *vars, t_game *game, int new_x, int new_y)
 	if (new_x < 0 || new_x >= game->size || new_y < 0 || new_y >= game->height)
 		return (0);
 	target = game->map[new_y][new_x];
-	if (target == '1' || (target == 'E' && game->collected < game->c))
+	if (target == '1')
 		return (0);
 	if (target == 'C')
 		game->collected++;
@@ -31,12 +43,11 @@ int	move_player(t_vars *vars, t_game *game, int new_x, int new_y)
 		close_window(vars);
 		exit(0);
 	}
-	game->map[game->player_y][game->player_x] = '0';
+	game->map[game->player_y][game->player_x] = game->pre_tile;
 	game->player_x = new_x;
 	game->player_y = new_y;
-	game->map[new_y][new_x] = 'P';
-	ft_putstr_fd("Moves: ", 1);
-	ft_putnbr_fd(++game->move, 1);
+	game->pre_tile = '0';
+	move_player2(game, new_x, new_y);
 	return (ft_putchar_fd('\n', 1), 1);
 }
 
@@ -90,6 +101,7 @@ int	close_window(t_vars *vars)
 		if (vars->lib->mlx_p)
 			free(vars->lib->mlx_p);
 	}
-	free(vars);
+	if (vars)
+		free(vars);
 	exit(0);
 }

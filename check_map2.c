@@ -6,7 +6,7 @@
 /*   By: antcamar <antcamar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 17:26:09 by antcamar          #+#    #+#             */
-/*   Updated: 2026/02/06 14:16:06 by antcamar         ###   ########.fr       */
+/*   Updated: 2026/02/16 13:08:36 by antcamar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,7 @@ void	attribute_close(const char *filename, int numberl, t_game *game)
 
 	i = -1;
 	check = open(filename, O_RDONLY);
-	if (check < 0)
-		openerror(game, check);
+	openerror(game, check);
 	while (++i < numberl)
 	{
 		game->map[i] = get_next_line(check);
@@ -105,7 +104,8 @@ void	attribute_close(const char *filename, int numberl, t_game *game)
 	i = 0;
 	while (game->map[i])
 	{
-		if (game->map[i][ft_strlen(game->map[i]) - 1] == '\n')
+		if (ft_strlen(game->map[i]) && game->map[i][ft_strlen(game->map[i])
+			- 1] == '\n')
 			game->map[i][ft_strlen(game->map[i]) - 1] = 0;
 		i++;
 	}

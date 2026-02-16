@@ -6,7 +6,7 @@
 /*   By: antcamar <antcamar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/27 00:45:05 by antcamar          #+#    #+#             */
-/*   Updated: 2026/02/06 14:15:56 by antcamar         ###   ########.fr       */
+/*   Updated: 2026/02/16 15:21:37 by antcamar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	load_sprite(t_lib *lib, t_sprite *sprite, char *path, t_game *game)
 			&sprite->height);
 	if (!sprite->img)
 	{
-		ft_putstr_fd("Failed to load: ", 2);
+		ft_putstr_fd("Error : Failed to load: ", 2);
 		ft_putstr_fd(path, 2);
 		ft_putstr_fd("\n", 2);
 		close_window2(lib, game);
@@ -53,7 +53,8 @@ void	close_window2(t_lib *lib, t_game *game)
 	if (lib->mlx_p)
 	{
 		mlx_destroy_display(lib->mlx_p);
-		free(lib->mlx_p);
+		if (lib->mlx_p)
+			free(lib->mlx_p);
 	}
 	exit(0);
 }
@@ -64,7 +65,7 @@ void	init_mlx(t_lib *lib, t_game *game)
 	if (!lib->mlx_p)
 	{
 		ft_free_t(game->map);
-		ft_putstr_fd("MLX failed\n", 2);
+		ft_putstr_fd("Error : MLX failed\n", 2);
 		exit(1);
 	}
 	lib->width = game->size * TILE_SIZE;
@@ -72,7 +73,7 @@ void	init_mlx(t_lib *lib, t_game *game)
 	lib->win_p = mlx_new_window(lib->mlx_p, lib->width, lib->height, "so_long");
 	if (!lib->win_p)
 	{
-		ft_putstr_fd("Window failed\n", 2);
+		ft_putstr_fd("Error : Window failed\n", 2);
 		close_window2(lib, game);
 		exit(1);
 	}
@@ -90,6 +91,7 @@ void	init_mlx2(t_lib *lib, t_game *game)
 	vars->lib = lib;
 	vars->game = game;
 	render_map(lib, game);
+	game->pre_tile = '0';
 	mlx_hook(lib->win_p, 2, 1L, key_handler, vars);
 	mlx_hook(lib->win_p, 17, 0, close_window, vars);
 	mlx_loop(lib->mlx_p);

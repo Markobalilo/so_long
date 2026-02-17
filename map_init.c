@@ -6,7 +6,7 @@
 /*   By: antcamar <antcamar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/27 00:45:05 by antcamar          #+#    #+#             */
-/*   Updated: 2026/02/16 15:21:37 by antcamar         ###   ########.fr       */
+/*   Updated: 2026/02/17 13:31:30 by antcamar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void	init_mlx(t_lib *lib, t_game *game)
 		ft_putstr_fd("Error : MLX failed\n", 2);
 		exit(1);
 	}
+	check_screen(game, lib);
 	lib->width = game->size * TILE_SIZE;
 	lib->height = game->height * TILE_SIZE;
 	lib->win_p = mlx_new_window(lib->mlx_p, lib->width, lib->height, "so_long");

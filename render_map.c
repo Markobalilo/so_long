@@ -6,7 +6,7 @@
 /*   By: antcamar <antcamar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 18:38:20 by antcamar          #+#    #+#             */
-/*   Updated: 2026/02/06 14:28:57 by antcamar         ###   ########.fr       */
+/*   Updated: 2026/02/17 13:31:50 by antcamar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,25 @@ void	render_map(t_lib *lib, t_game *game)
 		}
 		y++;
 	}
+}
+
+int	check_screen(t_game *game, t_lib *lib)
+{
+	int	max_width;
+	int	max_height;
+	int	map_pixel_width;
+	int	map_pixel_height;
+
+	mlx_get_screen_size(lib->mlx_p, &max_width, &max_height);
+	map_pixel_width = game->size * TILE_SIZE;
+	map_pixel_height = game->height * TILE_SIZE;
+	if (map_pixel_width > max_width || map_pixel_height > max_height)
+	{
+		ft_putstr_fd("Error : Map size exceeds screen size\n", 2);
+		ft_free_t(game->map);
+		mlx_destroy_display(lib->mlx_p);
+		free(lib->mlx_p);
+		exit(1);
+	}
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: antcamar <antcamar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 11:38:24 by antcamar          #+#    #+#             */
-/*   Updated: 2026/02/16 14:52:55 by antcamar         ###   ########.fr       */
+/*   Updated: 2026/02/17 13:29:58 by antcamar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,4 +94,5 @@ void			close_window2(t_lib *lib, t_game *game);
 void			init_mlx2(t_lib *lib, t_game *game);
 void			map_invalide(t_game *game, char c);
 void			check_name(const char *filename);
+int				check_screen(t_game *game, t_lib *lib);
 #endif

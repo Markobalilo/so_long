@@ -6,7 +6,7 @@
 /*   By: antcamar <antcamar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 16:05:15 by antcamar          #+#    #+#             */
-/*   Updated: 2026/01/22 15:55:56 by antcamar         ###   ########.fr       */
+/*   Updated: 2026/02/20 14:06:07 by antcamar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,10 @@ char	*extract_line(char **stash)
 	if ((*stash)[i] == '\n')
 	{
 		line = ft_substr(*stash, 0, i + 1);
-		tmp = ft_substr(*stash, i + 1, ft_strlen(*stash) - i);
+		if (ft_strlen(line))
+			tmp = ft_substr(*stash, i + 1, ft_strlen(*stash) - i);
+		 else
+		 	tmp = NULL;
 		free(*stash);
 		*stash = tmp;
 		return (line);
